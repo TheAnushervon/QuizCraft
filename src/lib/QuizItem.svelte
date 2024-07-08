@@ -14,13 +14,18 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 12px;
+		margin-top: 16px;
 		font-family: Kanit, sans-serif;
+		border-radius: 20px;
+		background-color: rgba(137, 33, 194, 0.26);
+		padding: 16px;
 	}
 
 	.quiz-title {
 		font-size: 28px;
 		color: #fff;
+		text-decoration: underline;
+		text-underline-offset: 8px;
 	}
 
 	.statistics-button {

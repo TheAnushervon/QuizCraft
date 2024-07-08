@@ -1,2 +1,3 @@
 # QuizCraft
-FWD-project. Aimed to create a simple Chatting platform. 
+
+FWD-project. Aimed to create a simple Chatting platform.

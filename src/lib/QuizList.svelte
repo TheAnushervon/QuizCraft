@@ -23,13 +23,10 @@
 
 <style>
 	.quiz-list {
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
+		list-style-type: disc;
 		border-radius: 20px;
-		background-color: rgba(137, 33, 194, 0.26);
 		display: flex;
-		margin-top: 16px;
+		margin-top: 0;
 		flex-direction: column;
 		padding: 16px;
 	}
