@@ -1,6 +1,38 @@
 <script lang="ts">
-	function handleLogout(): void {}
+	import Dialog, { Title, Content, Actions } from '@smui/dialog';
+  	import Button, { Label } from '@smui/button';
+	import { goto } from '$app/navigation'; 
+  let open = false;
+  let clicked = 'Nothing yet.';
+
+	function handleLogout(): void {
+		open = true ; 
+	}
+
+	function handleDialogClick(choice: string): void {
+    clicked = choice;
+    open = false;
+	if (choice === 'Yes'){
+		goto('/easy-quiz'); 
+	}
+  }
+
 </script>
+
+<Dialog bind:open aria-labelledby="simple-title" aria-describedby="simple-content">
+  <!-- Title cannot contain leading whitespace due to mdc-typography-baseline-top() -->
+  <Title id="simple-title">System-Message</Title>
+  <Content id="simple-content">Are you sure to log out?</Content>
+  <Actions>
+    <Button on:click={() => handleDialogClick('No')}>
+      <Label>No</Label>
+    </Button>
+    <Button on:click={() => handleDialogClick('Yes')}>
+      <Label>Yes</Label>
+    </Button>
+  </Actions>
+</Dialog>
+
 
 <header class="profile-header">
 	<h1 class="logo">Quiz<span class="logo-highlight">Craft: profile</span></h1>
