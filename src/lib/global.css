@@ -1,0 +1,16 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(
+      100% 100% at 50% 0%,
+      #242824 37.47%,
+      rgba(83, 232, 36, 0.34) 100%
+    );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
