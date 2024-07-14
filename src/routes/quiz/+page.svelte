@@ -30,6 +30,8 @@
                 const data = await response.json();
                 console.log(data);
                 apiData.set(data);
+                console.log("here we are")
+                console.log(data[0].id)
             } catch (error) {
                 console.log(error);
             }
