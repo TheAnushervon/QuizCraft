@@ -1,65 +1,67 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import { apiData, api_questions } from "./store.ts";
+	import { onMount } from 'svelte';
+	import { apiData, api_questions } from './store.ts';
 
-    interface Answer {
-        answer_a: string | null;
-        answer_b: string | null;
-        answer_c: string | null;
-        answer_d: string | null;
-        answer_e: string | null;
-        answer_f: string | null;
-    }
-    interface Question {
-        id: number;
-        question: string;
-        answers: Answer;
-    }
-    onMount(async () => {
-        try {
-            const response = await fetch("https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit=100");
-            const data = await response.json();
-            console.log(data);
-            apiData.set(data);
-        } catch (error) {
-            console.log(error);
-        }
-    });
+	interface Answer {
+		answer_a: string | null;
+		answer_b: string | null;
+		answer_c: string | null;
+		answer_d: string | null;
+		answer_e: string | null;
+		answer_f: string | null;
+	}
+	interface Question {
+		id: number;
+		question: string;
+		answers: Answer;
+	}
+	onMount(async () => {
+		try {
+			const response = await fetch(
+				'https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit=100'
+			);
+			const data = await response.json();
+			console.log(data);
+			apiData.set(data);
+		} catch (error) {
+			console.log(error);
+		}
+	});
 </script>
 
 <main>
-    <h1>Quiz questions:</h1>
-    <ul>
-        {#each $apiData as question (question.id)}
-            <li>
-                <h2>{question.question}</h2>
-                <ul>
-                    {#each Object.entries(question.answers) as [key, answer]}
-                        {#if answer}
-                            <li>{key}: {answer}</li>
-                        {/if}
-                    {/each}
-                </ul>
-            </li>
-        {/each}
-    </ul>
+	<h1>Quiz questions:</h1>
+	<ul>
+		{#each $apiData as question (question.id)}
+			<li>
+				<h2>{question.question}</h2>
+				<ul>
+					{#each Object.entries(question.answers) as [key, answer]}
+						{#if answer}
+							<li>{key}: {answer}</li>
+						{/if}
+					{/each}
+				</ul>
+			</li>
+		{/each}
+	</ul>
 </main>
 
 <style>
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
 
-    li {
-        margin-bottom: 1em;
-    }
+	li {
+		margin-bottom: 1em;
+	}
 
-    h2 {
-        margin-bottom: 0.5em;
-    }
+	h2 {
+		margin-bottom: 0.5em;
+	}
 
-    h1 {
-        margin-bottom: 1em;
-    }
+	h1 {
+		margin-bottom: 1em;
+	}
 </style>

@@ -44,6 +44,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"firebase": "^10.12.3",
 		"@material/floating-label": "^14.0.0",
 		"@material/line-ripple": "^14.0.0",
 		"@material/select": "^14.0.0",
