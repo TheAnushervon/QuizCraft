@@ -17,7 +17,7 @@
     }
     onMount(async () => {
         try {
-            const response = await fetch("https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit=10");
+            const response = await fetch("https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit=100");
             const data = await response.json();
             console.log(data);
             apiData.set(data);

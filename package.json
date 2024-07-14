@@ -21,6 +21,7 @@
 		"@smui/button": "^7.0.0",
 		"@smui/card": "^7.0.0",
 		"@smui/dialog": "^7.0.0",
+		"@smui/select": "^7.0.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -41,5 +42,11 @@
 		"vite": "^5.0.3",
 		"vitest": "^1.2.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@material/floating-label": "^14.0.0",
+		"@material/line-ripple": "^14.0.0",
+		"@material/select": "^14.0.0",
+		"@smui/textfield": "^7.0.0"
+	}
 }

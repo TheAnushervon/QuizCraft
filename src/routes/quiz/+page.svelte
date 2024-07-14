@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { apiData, api_questions } from "./store.ts";
+    import { apiData } from "./store.js";
 
     interface Answer {
         answer_a: string | null;
@@ -15,14 +15,26 @@
         question: string;
         answers: Answer;
     }
+
+    let limit: string | null = null; 
+    let category: string | null = null;
+
     onMount(async () => {
-        try {
-            const response = await fetch("https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit =100&category=Linux");
-            const data = await response.json();
-            console.log(data);
-            apiData.set(data);
-        } catch (error) {
-            console.log(error);
+        const params = new URLSearchParams(window.location.search); 
+        limit = params.get('limit'); 
+        category = params.get('category');
+
+        if (limit && category) {
+            try {
+                const response = await fetch(`https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit=${limit}&category=${category}`);
+                const data = await response.json();
+                console.log(data);
+                apiData.set(data);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log("Missing limit or category parameter");
         }
     });
 </script>
