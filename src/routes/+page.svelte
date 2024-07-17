@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import Button, {Label} from '@smui/button';
 	import { onMount } from 'svelte';
 	import { navigate } from 'svelte-routing';
@@ -17,16 +16,14 @@
 
 <style>
 	:global(.my-colored-button) {
-		margin-right: 50px; 
-		
+		margin-right: 50px;
+
 		/* background-color: green; */
-		
 	}
 	:global(.my-colored-button-reg) {
-		margin-left: 50px; 
-		
+		margin-left: 50px;
+
 		/* background-color: green; */
-		
 	}
 </style>
 
@@ -43,3 +40,4 @@ Or
 </Button>
 </div>
 </main>
+

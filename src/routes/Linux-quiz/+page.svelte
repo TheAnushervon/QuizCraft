@@ -3,29 +3,32 @@
     import { apiData, api_questions } from "./store.ts";
 	import CheckLogin from "$lib/CheckLogin.svelte";
 
-    interface Answer {
-        answer_a: string | null;
-        answer_b: string | null;
-        answer_c: string | null;
-        answer_d: string | null;
-        answer_e: string | null;
-        answer_f: string | null;
-    }
-    interface Question {
-        id: number;
-        question: string;
-        answers: Answer;
-    }
-    onMount(async () => {
-        try {
-            const response = await fetch("https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit =10&category=Linux");
-            const data = await response.json();
-            console.log(data);
-            apiData.set(data);
-        } catch (error) {
-            console.log(error);
-        }
-    });
+
+	interface Answer {
+		answer_a: string | null;
+		answer_b: string | null;
+		answer_c: string | null;
+		answer_d: string | null;
+		answer_e: string | null;
+		answer_f: string | null;
+	}
+	interface Question {
+		id: number;
+		question: string;
+		answers: Answer;
+	}
+	onMount(async () => {
+		try {
+			const response = await fetch(
+				'https://quizapi.io/api/v1/questions?apiKey=d8nX9BRGAPjzL1ugpVHa8uCdstHXS0rnyRT4GTz5&limit =100&category=Linux'
+			);
+			const data = await response.json();
+			console.log(data);
+			apiData.set(data);
+		} catch (error) {
+			console.log(error);
+		}
+	});
 </script>
 
 <CheckLogin>
@@ -66,3 +69,4 @@
         }
     </style>
 </CheckLogin>
+

@@ -6,3 +6,4 @@
 <CheckLogin>
     <Button on:click={() => alert('Really')}>Click Me</Button>
 </CheckLogin>
+
