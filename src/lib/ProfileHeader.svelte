@@ -1,21 +1,22 @@
 <script lang="ts">
 	import Dialog, { Title, Content, Actions } from '@smui/dialog';
-  	import Button, { Label } from '@smui/button';
-	import { goto } from '$app/navigation'; 
+	import Button, { Label } from '@smui/button';
+	import { goto } from '$app/navigation';
 	import { logout } from './firebase/fitebase';
-  let open = false;
-  let clicked = 'Nothing yet.';
+	let open = false;
+	let clicked = 'Nothing yet.';
 
 	function handleLogout(): void {
 		open = true;
 	}
 
 	function handleDialogClick(choice: string): void {
-    clicked = choice;
-    open = false;
-	if (choice === 'Yes'){
-		goto('/easy-quiz'); 
-		logout(localStorage.getItem("log"));
+		clicked = choice;
+		open = false;
+		if (choice === 'Yes') {
+			goto('/easy-quiz');
+			logout(localStorage.getItem('log'));
+		}
 	}
 </script>
 
