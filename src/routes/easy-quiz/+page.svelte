@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { apiData, api_questions } from "./store.ts";
+	import CheckLogin from '$lib/CheckLogin.svelte';
 
     interface Answer {
         answer_a: string | null;
@@ -26,40 +27,41 @@
         }
     });
 </script>
-
-<main>
-    <h1>Quiz questions:</h1>
-    <ul>
-        {#each $apiData as question (question.id)}
-            <li>
-                <h2>{question.question}</h2>
-                <ul>
-                    {#each Object.entries(question.answers) as [key, answer]}
-                        {#if answer}
-                            <li>{key}: {answer}</li>
-                        {/if}
-                    {/each}
-                </ul>
-            </li>
-        {/each}
-    </ul>
-</main>
-
-<style>
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        margin-bottom: 1em;
-    }
-
-    h2 {
-        margin-bottom: 0.5em;
-    }
-
-    h1 {
-        margin-bottom: 1em;
-    }
-</style>
+<CheckLogin>
+    <main>
+        <h1>Quiz questions:</h1>
+        <ul>
+            {#each $apiData as question (question.id)}
+                <li>
+                    <h2>{question.question}</h2>
+                    <ul>
+                        {#each Object.entries(question.answers) as [key, answer]}
+                            {#if answer}
+                                <li>{key}: {answer}</li>
+                            {/if}
+                        {/each}
+                    </ul>
+                </li>
+            {/each}
+        </ul>
+    </main>
+    
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    
+        li {
+            margin-bottom: 1em;
+        }
+    
+        h2 {
+            margin-bottom: 0.5em;
+        }
+    
+        h1 {
+            margin-bottom: 1em;
+        }
+    </style>
+</CheckLogin>
