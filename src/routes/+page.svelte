@@ -1,31 +1,18 @@
 <script lang="ts">
-	import Button, { Label } from '@smui/button';
+	import Button, {Label} from '@smui/button';
+	import { onMount } from 'svelte';
+	import { navigate } from 'svelte-routing';
+	onMount(() =>{
+		document.getElementById('log')?.addEventListener("click", () => {
+			navigate("/login");
+			location.reload();
+		});
+		document.getElementById('reg')?.addEventListener("click", () => {
+			navigate("/register");
+			location.reload();
+		});
+	})
 </script>
-
-<main>
-	<h2>QuizCraft</h2>
-	<br />
-	<h3>Some bio</h3>
-	<div>
-		<Button
-			class="my-colored-button"
-			variant="unelevated"
-			style="background-color:green"
-			href="/login"
-		>
-			<Label>Log in</Label>
-		</Button>
-		Or
-		<Button
-			class="my-colored-button-reg"
-			variant="unelevated"
-			style="background-color:green"
-			href="/register"
-		>
-			<Label>Register</Label>
-		</Button>
-	</div>
-</main>
 
 <style>
 	:global(.my-colored-button) {
@@ -39,3 +26,18 @@
 		/* background-color: green; */
 	}
 </style>
+
+<main>
+<h2>QuizCraft</h2> <br>
+<h3>Some bio</h3>
+<div>
+<Button class="my-colored-button" variant="outlined" style="color:green" id="log">
+	<Label>Log in</Label>
+</Button>
+Or
+<Button class="my-colored-button-reg" variant="outlined" style="color:green" id="reg">
+	<Label>Register</Label>
+</Button>
+</div>
+</main>
+

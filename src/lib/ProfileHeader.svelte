@@ -2,6 +2,7 @@
 	import Dialog, { Title, Content, Actions } from '@smui/dialog';
 	import Button, { Label } from '@smui/button';
 	import { goto } from '$app/navigation';
+	import { logout } from './firebase/fitebase';
 	let open = false;
 	let clicked = 'Nothing yet.';
 
@@ -13,7 +14,8 @@
 		clicked = choice;
 		open = false;
 		if (choice === 'Yes') {
-			goto('/');
+			goto('/easy-quiz');
+			logout(localStorage.getItem('log'));
 		}
 	}
 </script>
