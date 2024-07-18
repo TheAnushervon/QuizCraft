@@ -3,7 +3,7 @@ name: Lint, Check and Build
 on:
   push:
     branches:
-      - hw5
+      - "**"
 
 jobs:
   lint:
