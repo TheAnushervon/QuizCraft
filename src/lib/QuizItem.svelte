@@ -14,7 +14,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 16px;
 		font-family: Kanit, sans-serif;
 		border-radius: 20px;
 		background-color: rgba(137, 33, 194, 0.26);
