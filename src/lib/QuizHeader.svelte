@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
 <header class="quiz-header">
-	Quiz<span class="highlight">Craft: Creation</span>
+	Quiz<span class="highlight">Craft: Edit</span>
 </header>
 
 <style>
