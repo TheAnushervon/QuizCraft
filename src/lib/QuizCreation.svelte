@@ -4,14 +4,45 @@
 	import VariantItem from './VariantItem.svelte';
 	import NavigationButtons from './NavigationButtons.svelte';
 	import { db } from './firebase/fitebase';
-	import { addDoc, collection, doc, setDoc, query, where, getDocs } from 'firebase/firestore';
+	import {
+		addDoc,
+		collection,
+		doc,
+		setDoc,
+		deleteDoc,
+		query,
+		where,
+		getDocs
+	} from 'firebase/firestore';
 	import { getNickName } from './firebase/fitebase';
+	import { goto } from '$app/navigation';
 
 	export let data;
 
-	let quizName = 'some';
+	let quizName = '';
+	let temp_quizName = quizName;
+
+	async function deleteQuiz(quizName: string) {
+		console.log(quizName);
+		goto('/main');
+		const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
+		const querySnapshot = await getDocs(q);
+
+		if (!querySnapshot.empty) {
+			const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+			try {
+				await deleteDoc(quizRef);
+				console.log('Quiz deleted successfully');
+			} catch (error) {
+				console.error('Error deleting quiz', error);
+			}
+		} else {
+			console.log('Quiz not found');
+		}
+	}
 
 	async function releaseQuiz() {
+		goto('/main');
 		let nickname = await getNickName(localStorage.getItem('log'));
 
 		const quizData = {
@@ -146,8 +177,15 @@
 		}
 	];
 	console.log(questions[0].question);
-	questions = data.questions;
-	console.log(data.questions);
+	console.log(data);
+	if (data != undefined) {
+		console.log(data);
+		quizName = data.quiz.name;
+		temp_quizName = data.quiz.name;
+		console.log(data.quiz.name);
+		questions = data.quiz.questions;
+	}
+	// console.log(data.questions);
 	// console.log(data[0].question);
 
 	function addVariant(questionIndex: number) {
@@ -263,6 +301,7 @@
 	</div>
 	<NavigationButtons on:previous={previousQuestion} on:next={nextQuestion} />
 	<button class="release-button" on:click={releaseQuiz}>Save</button>
+	<button class="delete-quiz-button" on:click={() => deleteQuiz(temp_quizName)}>Delete Quiz</button>
 </main>
 
 <style>
@@ -325,6 +364,19 @@
 		font-family: Kanit, sans-serif;
 		border-radius: 14px;
 		background-color: rgba(83, 232, 36, 0.53);
+		margin-top: 20px;
+		color: #fff;
+		padding: 13px 10px 6px;
+		border: none;
+		cursor: pointer;
+		font-size: 28px;
+		font-weight: 400;
+	}
+
+	.delete-quiz-button {
+		font-family: Kanit, sans-serif;
+		border-radius: 14px;
+		background-color: rgba(228, 34, 17, 0.53);
 		margin-top: 20px;
 		color: #fff;
 		padding: 13px 10px 6px;

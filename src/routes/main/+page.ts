@@ -4,7 +4,7 @@ import { getNickName } from '$lib/firebase/fitebase';
 import { type Quiz } from '$lib/quiz';
 
 /** @type {import('./$types').PageLoad} */
-export async function load({ params }) {
+export async function load() {
 	const quizzes: Quiz[] = [];
 	// #TODO: params.id
 	if (
@@ -25,9 +25,9 @@ export async function load({ params }) {
 		console.log('not found');
 	}
 
-	const found_quiz = quizzes.find((quiz) => quiz.id === params.id);
+	// const found_quiz = quizzes.find((quiz) => quiz.id === params.id);
 
 	return {
-		quiz: found_quiz
+		quizzes: quizzes
 	};
 }
