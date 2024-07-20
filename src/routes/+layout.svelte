@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import '@fortawesome/fontawesome-free/css/all.min.css';
 	// import '../lib/global.css';
 
 	let currentPageTitle = '';
