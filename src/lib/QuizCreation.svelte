@@ -3,18 +3,22 @@
 	import QuestionSection from './QuestionSection.svelte';
 	import VariantItem from './VariantItem.svelte';
 	import NavigationButtons from './NavigationButtons.svelte';
-	import { db, auth } from './firebase/firebase';
+	import { db, auth } from './firebase/fitebase';
 	import { addDoc, collection } from 'firebase/firestore';
+	import { getNickName } from './firebase/fitebase';
+
+	let quizName = '';
 
 	async function releaseQuiz() {
-		const user = auth.currentUser;
-		if (!user) {
-			console.error('User is not logged in');
-			return;
-		}
+		// const user = auth.currentUser;
+		// if (!user) {
+		// 	console.error('User is not logged in');
+		// 	return;
+		// }
+		let nickname = await getNickName(localStorage.getItem('log'));
 
 		const quizData = {
-			userId: user.uid,
+			user_nickname: nickname,
 			questions: questions.map((question) => ({
 				question: question.question,
 				variants: question.variants.map((variant) => ({
@@ -215,6 +219,8 @@
 </main> -->
 
 <main class="quiz-creation">
+	<input type="text" placeholder="Enter quiz name" bind:value={quizName} />
+
 	<QuizHeader />
 	<QuestionSection
 		number={currentQuestionIndex + 1}
@@ -238,7 +244,7 @@
 		<button class="add-button" on:click={addQuestion}>Add question</button>
 	</div>
 	<NavigationButtons on:previous={previousQuestion} on:next={nextQuestion} />
-	<button class="release-button" on:click={releaseQuiz}>Release quiz</button>
+	<button class="release-button" on:click={releaseQuiz}>Save</button>
 </main>
 
 <style>

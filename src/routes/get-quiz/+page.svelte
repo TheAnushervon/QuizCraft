@@ -1,10 +1,10 @@
 <script lang="ts">
+	import UserQuizzes from '$lib/UserQuizzes.svelte';
 	import CheckLogin from '$lib/CheckLogin.svelte';
-	import QuizCreation from '$lib/QuizCreation.svelte';
 </script>
 
 <CheckLogin>
 	<main>
-		<QuizCreation />
+		<UserQuizzes />
 	</main>
 </CheckLogin>
