@@ -61,6 +61,7 @@
 		font-size: 28px;
 		font-weight: 400;
 		background: transparent;
+		width: 100%;
 		border: none;
 		flex-grow: 1;
 	}

@@ -259,17 +259,18 @@
 	.action-buttons {
 		display: flex;
 		margin-top: 15px;
+		justify-content: space-between;
 		width: 100%;
 		max-width: 700px;
-		gap: 300px;
+		/* gap: 300px; */
 		font-size: 22px;
 	}
 
 	.delete-button,
 	.add-button {
 		font-family: Kanit, sans-serif;
-		flex-grow: 1;
-		flex-basis: auto;
+		/* flex-grow: 1;
+		flex-basis: auto; */
 		background: none;
 		border: none;
 		cursor: pointer;
