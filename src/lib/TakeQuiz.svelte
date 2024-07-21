@@ -78,7 +78,10 @@
 		nextQuestion();
 	}
 </script>
-
+<svelte:head>
+	<title>Quiz "{quizName}"</title>
+	<meta name="Quiz name" content="{quizName}" />
+</svelte:head>
 <body style="margin: 0;">
 	{#if showResults}
 		<div class="results">
