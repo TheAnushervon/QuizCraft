@@ -10,7 +10,7 @@
 			(localStorage.getItem('log') && (await getNickName(localStorage.getItem('log'))) === null) ||
 			!localStorage.getItem('log')
 		) {
-			navigate('/');
+			navigate('/login');
 			location.reload();
 		} else dataStore.set(true);
 	});
