@@ -32,51 +32,11 @@
 	<ul class="quiz-list">
 		{#each quiz_pair as pair}
 			<li class="quiz-list">
-				<QuizItem title={pair.name} id={pair.id} />
+				<a href={`/take-quiz/${pair.id}`} class="quiz-item"> {pair.name} </a>
 			</li>
 		{/each}
 	</ul>
 </div>
 
 <style>
-	ul.quiz-list {
-		list-style-type: disc;
-		border-radius: 20px;
-		display: flex;
-		margin-top: 0;
-		flex-direction: column;
-		padding: 16px;
-	}
-
-	li.quiz-list {
-		background-color: rgba(0, 0, 0, 0);
-		list-style-type: none;
-		margin: 8px;
-	}
-
-	@media (max-width: 991px) {
-		.quiz-list {
-			padding: 12px;
-		}
-	}
-
-	.scrollbar-container {
-		height: 420px;
-		width: 100%;
-		overflow: hidden;
-		overflow-y: scroll;
-	}
-
-	.scrollbar-container::-webkit-scrollbar {
-		background-color: #53e82420;
-		border-radius: 5px;
-		width: 30px;
-		border: 3px solid #4ac32420;
-	}
-
-	.scrollbar-container::-webkit-scrollbar-thumb {
-		border-radius: 5px;
-		background-color: #61377b;
-		border: 1px solid #000;
-	}
 </style>

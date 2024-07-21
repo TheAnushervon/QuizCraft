@@ -14,7 +14,7 @@
 		clicked = choice;
 		open = false;
 		if (choice === 'Yes') {
-			goto('/easy-quiz');
+			goto('/');
 			logout(localStorage.getItem('log'));
 		}
 	}
