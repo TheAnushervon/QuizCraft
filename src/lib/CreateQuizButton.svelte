@@ -19,7 +19,9 @@
 		goto(url);
 	}
 
-	function createNewQuiz(): void {}
+	function createNewQuiz(): void {
+		goto('/quiz-creation');
+	}
 
 	function PassNewQuiz(): void {
 		goto('/easy-quiz');
@@ -110,9 +112,9 @@
 		padding: 1rem;
 	}
 
-	.input-field {
+	/* .input-field {
 		margin-bottom: 1rem;
-	}
+	} */
 
 	@media (max-width: 991px) {
 		.create-quiz-button {

@@ -1,12 +1,10 @@
 <script lang="ts">
 	import CheckLogin from '$lib/CheckLogin.svelte';
-	import ProfilePage from '$lib/ProfilePage.svelte';
-	export let data;
-	console.log(data);
+	import QuizCreation from '$lib/QuizCreation.svelte';
 </script>
 
 <CheckLogin>
 	<main>
-		<ProfilePage {data} />
+		<QuizCreation />
 	</main>
 </CheckLogin>

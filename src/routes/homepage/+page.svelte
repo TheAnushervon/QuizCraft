@@ -1,12 +1,12 @@
 <script lang="ts">
 	import CheckLogin from '$lib/CheckLogin.svelte';
-	import ProfilePage from '$lib/ProfilePage.svelte';
+	import GetQuiz from '$lib/GetQuiz.svelte';
 	export let data;
 	console.log(data);
 </script>
 
 <CheckLogin>
 	<main>
-		<ProfilePage {data} />
+		<GetQuiz {data} />
 	</main>
 </CheckLogin>

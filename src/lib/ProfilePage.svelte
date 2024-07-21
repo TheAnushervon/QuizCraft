@@ -3,6 +3,7 @@
 	import UserInfo from './UserInfo.svelte';
 	import QuizList from './QuizList.svelte';
 	import CreateQuizButton from './CreateQuizButton.svelte';
+	export let data;
 </script>
 
 <body style="margin: 0;">
@@ -12,7 +13,7 @@
 			<UserInfo />
 			<div class="quiz-section">
 				<h2 class="quiz-section-title">Your quizzes</h2>
-				<QuizList />
+				<QuizList {data} />
 				<CreateQuizButton />
 			</div>
 		</div>

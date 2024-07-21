@@ -1,13 +1,14 @@
 <script lang="ts">
 	export let title: string;
+	export let id: string;
 
 	function viewStatistics(): void {}
 </script>
 
-<div class="quiz-item">
+<a href={`/quizzes/${id}`} class="quiz-item">
 	<h3 class="quiz-title">{title}</h3>
 	<button class="statistics-button" on:click={viewStatistics}> Statistic </button>
-</div>
+</a>
 
 <style>
 	.quiz-item {
@@ -18,6 +19,7 @@
 		border-radius: 20px;
 		background-color: rgba(137, 33, 194, 0.26);
 		padding: 16px;
+		text-decoration: none;
 	}
 
 	.quiz-title {
