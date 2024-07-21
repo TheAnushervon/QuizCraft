@@ -18,6 +18,9 @@
 			logout(localStorage.getItem('log'));
 		}
 	}
+	function HandleLogo(){
+		goto('/homepage'); 
+	}
 </script>
 
 <Dialog bind:open aria-labelledby="simple-title" aria-describedby="simple-content">
@@ -35,7 +38,7 @@
 </Dialog>
 
 <header class="profile-header">
-	<h1 class="logo">Quiz<span class="logo-highlight">Craft: profile</span></h1>
+	<button class="logo" on:click={HandleLogo}>Quiz<span class="logo-highlight">Craft: profile</span></button>
 	<button class="logout-button" on:click={handleLogout}>Log out</button>
 </header>
 
@@ -55,6 +58,9 @@
 		font:
 			48px 'Kanit',
 			sans-serif;
+		background-color: transparent;
+		border: transparent;
+		cursor: pointer;
 	}
 
 	.logo-highlight {

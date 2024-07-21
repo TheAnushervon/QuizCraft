@@ -6,34 +6,18 @@
 	export let data;
 </script>
 
-<body style="margin: 0;">
-	<main class="profile-page">
-		<ProfileHeader />
-		<div class="profile-content">
-			<UserInfo />
-			<div class="quiz-section">
-				<h2 class="quiz-section-title">Your quizzes</h2>
-				<QuizList {data} />
-				<CreateQuizButton />
-			</div>
-		</div>
-	</main>
-</body>
+<div class="profile-content">
+	<UserInfo />
+	<div class="quiz-section">
+		<h2 class="quiz-section-title">Your quizzes</h2>
+		<QuizList {data} />
+		<CreateQuizButton />
+	</div>
+</div>
 
 <style>
-	.profile-page {
-		background: radial-gradient(
-			161.81% 143.28% at 26.61% 20.97%,
-			#242824 37.47%,
-			rgba(83, 232, 36, 0.34) 100%
-		);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		min-height: 100vh;
-		box-sizing: border-box;
-	}
-
+	
+	
 	.profile-content {
 		width: 100%;
 		max-width: 1400px;
