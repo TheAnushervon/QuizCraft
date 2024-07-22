@@ -63,22 +63,30 @@
 		nextQuestion();
 	}
 </script>
+
 <svelte:head>
 	<title>Quiz "{quizName}"</title>
-	<meta name="Quiz name" content="{quizName}" />
+	<meta name="Quiz name" content={quizName} />
 </svelte:head>
 <body style="margin: 0;">
 	{#if showResults}
-	<div class="results-container">
-		<div class="results">
-			<p>You answered {correctAnswers} out of {questions.length} questions correctly.</p>
-			<div class="results-circles">
-				{#each questions as question, index}
-					<div class="result-circle {question.variants.some(variant => variant.isSelected && variant.isCorrect) ? 'correct' : 'incorrect'}"></div>
-				{/each}
+		<div class="results-container">
+			<QuizHeader />
+			<div class="results">
+				<p>You answered {correctAnswers} out of {questions.length} questions correctly.</p>
+				<div class="results-circles">
+					{#each questions as question, index}
+						<div
+							class="result-circle {question.variants.some(
+								(variant) => variant.isSelected && variant.isCorrect
+							)
+								? 'correct'
+								: 'incorrect'}"
+						></div>
+					{/each}
+				</div>
 			</div>
 		</div>
-	</div>
 	{:else}
 		<main class="quiz-taking">
 			<QuizHeader />
@@ -142,7 +150,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		/* justify-content: center; */
 		min-height: 100vh;
 		background: radial-gradient(
 			161.81% 143.28% at 26.61% 20.97%,
