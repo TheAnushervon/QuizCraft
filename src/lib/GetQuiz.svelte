@@ -1,5 +1,6 @@
 <script lang="ts">
 	import QuizItem from './QuizItem.svelte';
+	import QuizHeader from './QuizHeader.svelte';
 	export let data;
 
 	interface QuizPair {
@@ -17,6 +18,7 @@
 </script>
 
 <div class="profile-page">
+	<QuizHeader />
 	<div class="profile-content">
 		<div class="quiz-section">
 			<h2>The list of the quizzes</h2>
@@ -24,7 +26,10 @@
 				<ul class="quiz-list">
 					{#each quiz_pair as pair}
 						<li class="quiz-list-item">
-							<button class="quiz-item" on:click={() => window.location.href = `/take-quiz/${pair.id}`}>
+							<button
+								class="quiz-item"
+								on:click={() => (window.location.href = `/take-quiz/${pair.id}`)}
+							>
 								{pair.name}
 							</button>
 						</li>
@@ -46,6 +51,7 @@
 		flex-direction: column;
 		align-items: center;
 		min-height: 100vh;
+		font-family: Kanit;
 		box-sizing: border-box;
 	}
 
@@ -116,6 +122,7 @@
 		cursor: pointer;
 		width: 100%;
 		text-align: left;
+		font-family: Kanit;
 	}
 
 	button.quiz-item:hover {
@@ -131,17 +138,17 @@
 		.quiz-list {
 			padding: 12px;
 		}
-		
+
 		.profile-content {
 			flex-direction: column;
 			align-items: center;
 		}
-		
+
 		.quiz-section {
 			width: 100%;
 			padding: 0 20px;
 		}
-		
+
 		.scrollbar-container {
 			height: auto;
 			max-height: 420px;

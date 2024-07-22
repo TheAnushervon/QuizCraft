@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import CheckLogin from '$lib/CheckLogin.svelte';
 	import GetQuiz from '$lib/GetQuiz.svelte';
@@ -11,4 +10,3 @@
 		<GetQuiz {data} />
 	</main>
 </CheckLogin>
-

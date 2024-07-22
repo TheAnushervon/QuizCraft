@@ -63,10 +63,17 @@
 		// return !questionErrors[index];
 		let isValid = true;
 		for (let i = 0; i < questions.length; i++) {
-			questionErrors[i] = questions[i].question ? '' : 'Question cannot be empty';
-			isValid = !questionErrors[i] && isValid;
-			return isValid;
+			isValid = !!questions[i].question && isValid;
 		}
+		return isValid;
+	}
+
+	function validateNoVariants() {
+		let isValid = true;
+		for (let i = 0; i < questions.length; i++) {
+			isValid = !!questions[i].variants.length && isValid;
+		}
+		return isValid;
 	}
 
 	function validateVariant() {
@@ -74,7 +81,6 @@
 		for (let i = 0; i < questions.length; i++) {
 			for (let j = 0; j < questions[i].variants.length; j++) {
 				isValid = !!questions[i].variants[j].text && isValid;
-				console.log(questions[i].variants[j]);
 			}
 		}
 		return isValid;
@@ -121,6 +127,8 @@
 			alert('Quiz name cannot be empty');
 		} else if (!validateQuestion()) {
 			alert('Question cannot be empty, recheck please and delete unnecessary ones');
+		} else if (!validateNoVariants()) {
+			alert('Question should have at least one variant');
 		} else if (!validateVariant()) {
 			alert('Variant cannot be empty, recheck please and remove unnecessary ones');
 		} else if (!validateVariants()) {
@@ -164,12 +172,14 @@
 			if (quizName != temp_quizName) {
 				const q = query(collection(db, 'quizzes'), where('name', '==', temp_quizName));
 				const querySnapshot = await getDocs(q);
-				const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
-				try {
-					await deleteDoc(quizRef);
-					console.log('Quiz deleted successfully');
-				} catch (error) {
-					console.error('Error deleting quiz', error);
+				if (!querySnapshot.empty) {
+					const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+					try {
+						await deleteDoc(quizRef);
+						console.log('Quiz deleted successfully');
+					} catch (error) {
+						console.error('Error deleting quiz', error);
+					}
 				}
 			}
 

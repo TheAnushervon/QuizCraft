@@ -3,12 +3,17 @@
 	function gotoAbout(): void {
 		goto('/about');
 	}
+
+	function gotoProfile(): void {
+		goto('/main');
+	}
 </script>
 
 <header class="quiz-header">
 	<a href="/" class="link"> <h1 class="logo">Quiz<span class="logo-highlight">Craft</span></h1></a>
 	<div class="both">
 		<button class="about-button" on:click={gotoAbout}>About</button>
+		<button class="profile-button" on:click={gotoProfile}>Profile</button>
 	</div>
 </header>
 
@@ -41,12 +46,26 @@
 		border-radius: 20px;
 		/* background-color: rgba(137, 33, 194, 0.5); */
 		/* color: #fff; */
-		padding: 12px 40px;
+		padding: 12px 20px;
 		font:
 			28px Kanit,
 			sans-serif;
 		border: none;
 		cursor: pointer;
 		margin-right: 10px;
+	}
+	.both {
+		padding-left: 40px;
+	}
+	.profile-button {
+		border-radius: 20px;
+		background-color: rgba(137, 33, 194, 0.5);
+		color: #fff;
+		padding: 12px 20px;
+		font:
+			28px Kanit,
+			sans-serif;
+		border: none;
+		cursor: pointer;
 	}
 </style>
