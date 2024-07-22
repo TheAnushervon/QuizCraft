@@ -16,22 +16,7 @@
 	let quizName = '';
 
 	let currentQuestionIndex = 0;
-	let questions: Question[] = [
-		// {
-		// 	question: 'Question 1?',
-		// 	variants: [
-		// 		{ text: 'Variant1', isCorrect: true, isSelected: false },
-		// 		{ text: 'Variant2', isCorrect: false, isSelected: false }
-		// 	]
-		// },
-		// {
-		// 	question: 'Question 2?',
-		// 	variants: [
-		// 		{ text: 'Variant1', isCorrect: false, isSelected: false },
-		// 		{ text: 'Variant2', isCorrect: true, isSelected: false }
-		// 	]
-		// }
-	];
+	let questions: Question[] = [];
 
 	if (data != undefined) {
 		console.log(data.quiz);

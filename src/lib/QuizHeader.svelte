@@ -1,20 +1,52 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	function gotoAbout(): void {
+		goto('/about');
+	}
+</script>
 
 <header class="quiz-header">
-	Quiz<span class="highlight">Craft: Edit</span>
+	<a href="/" class="link"> <h1 class="logo">Quiz<span class="logo-highlight">Craft</span></h1></a>
+	<div class="both">
+		<button class="about-button" on:click={gotoAbout}>About</button>
+	</div>
 </header>
 
 <style>
 	.quiz-header {
-		color: #8921c2;
-		align-self: flex-start;
-		margin: 10px 0 0 25px;
-		font:
-			42px Kanit,
-			sans-serif;
+		display: flex;
+		width: 100%;
+		max-width: 1400px;
+		justify-content: space-between;
+		align-items: center;
+		font-weight: 400;
 	}
 
-	.highlight {
-		color: rgba(137, 33, 194, 1);
+	.link {
+		text-decoration: none;
+	}
+
+	.logo {
+		color: #53e824;
+		font:
+			48px 'Kanit',
+			sans-serif;
+		text-decoration: none;
+	}
+
+	.logo-highlight {
+		color: #8921c2;
+	}
+	.about-button {
+		border-radius: 20px;
+		/* background-color: rgba(137, 33, 194, 0.5); */
+		/* color: #fff; */
+		padding: 12px 40px;
+		font:
+			28px Kanit,
+			sans-serif;
+		border: none;
+		cursor: pointer;
+		margin-right: 10px;
 	}
 </style>

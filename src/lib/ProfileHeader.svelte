@@ -18,6 +18,10 @@
 			logout(localStorage.getItem('log'));
 		}
 	}
+
+	function gotoAbout(): void {
+		goto('/about');
+	}
 </script>
 
 <Dialog bind:open aria-labelledby="simple-title" aria-describedby="simple-content">
@@ -35,8 +39,11 @@
 </Dialog>
 
 <header class="profile-header">
-	<h1 class="logo">Quiz<span class="logo-highlight">Craft: profile</span></h1>
-	<button class="logout-button" on:click={handleLogout}>Log out</button>
+	<a href="/" class="link"> <h1 class="logo">Quiz<span class="logo-highlight">Craft</span></h1></a>
+	<div class="both">
+		<button class="about-button" on:click={gotoAbout}>About</button>
+		<button class="logout-button" on:click={handleLogout}>Log out</button>
+	</div>
 </header>
 
 <style>
@@ -50,11 +57,16 @@
 		font-weight: 400;
 	}
 
+	.link {
+		text-decoration: none;
+	}
+
 	.logo {
 		color: #53e824;
 		font:
 			48px 'Kanit',
 			sans-serif;
+		text-decoration: none;
 	}
 
 	.logo-highlight {
@@ -71,6 +83,19 @@
 			sans-serif;
 		border: none;
 		cursor: pointer;
+	}
+
+	.about-button {
+		border-radius: 20px;
+		/* background-color: rgba(137, 33, 194, 0.5); */
+		/* color: #fff; */
+		padding: 12px 40px;
+		font:
+			28px Kanit,
+			sans-serif;
+		border: none;
+		cursor: pointer;
+		margin-right: 10px;
 	}
 
 	@media (max-width: 991px) {
