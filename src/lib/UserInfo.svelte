@@ -1,6 +1,12 @@
 <script lang="ts">
-	export let name: string = 'Name';
+	import { getNickName } from './firebase/fitebase';
+	// export let name: string = 'Name';
 	export let imageUrl: string = './profile.svg';
+	import { onMount } from 'svelte';
+	export let name: string | null = '';
+	onMount(async () => {
+		name = await getNickName(localStorage.getItem('log'));
+	});
 </script>
 
 <section class="user-info">

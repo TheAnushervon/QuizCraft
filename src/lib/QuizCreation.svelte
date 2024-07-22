@@ -99,7 +99,6 @@
 	}
 
 	async function deleteQuiz(quizName: string) {
-		goto('/main');
 		const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
 		const querySnapshot = await getDocs(q);
 
@@ -107,6 +106,7 @@
 			const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
 			try {
 				await deleteDoc(quizRef);
+				goto('/main');
 				console.log('Quiz deleted successfully');
 			} catch (error) {
 				console.error('Error deleting quiz', error);
@@ -126,7 +126,6 @@
 		} else if (!validateVariants()) {
 			alert('At least one variant should be correct in each question');
 		} else {
-			goto('/main');
 			let nickname = await getNickName(localStorage.getItem('log'));
 
 			const quizData = {
@@ -161,6 +160,20 @@
 					console.error('Error updating quiz', error);
 				}
 			}
+
+			if (quizName != temp_quizName) {
+				const q = query(collection(db, 'quizzes'), where('name', '==', temp_quizName));
+				const querySnapshot = await getDocs(q);
+				const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+				try {
+					await deleteDoc(quizRef);
+					console.log('Quiz deleted successfully');
+				} catch (error) {
+					console.error('Error deleting quiz', error);
+				}
+			}
+
+			goto('/main');
 		}
 	}
 
