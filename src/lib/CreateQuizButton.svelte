@@ -1,19 +1,17 @@
 <script lang="ts">
-	import { Router, Link, Route } from 'svelte-routing';
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Button from '@smui/button';
-	import TextField from '@smui/textfield';
 	import Dialog, { Title, Content, Actions } from '@smui/dialog';
 
 	let categories = ['bash', 'Linux', 'uncategorized', 'Docker', 'CMS', 'Code', 'DevOps'];
 	let dialogOpen = false;
-	let value = '';
-	let count = 0;
+	let value = categories[0];
+	let count = 1;
 
 	function closeDialog() {
 		dialogOpen = false;
 	}
+
 	function Generate() {
 		const url = `/quiz?limit=${count}&category=${value}`;
 		goto(url);
@@ -28,14 +26,13 @@
 	}
 
 	function LinuxQuiz(): void {
-		goto('Linux-quiz');
+		goto('/Linux-quiz');
 	}
+
 	function TestQuiz(): void {
-		goto('testquiz');
+		goto('/testquiz');
 	}
 </script>
-
-<!-- <Button on:click={() => dialogOpen = true}>Pass new Quiz</Button> -->
 
 <Dialog bind:open={dialogOpen}>
 	<Title>Quiz generating</Title>
@@ -43,7 +40,7 @@
 		<div class="content">
 			<div>
 				<label for="category-questions">Category of Questions</label>
-				<select bind:value id="category-questions">
+				<select bind:value={value} id="category-questions">
 					{#each categories as category}
 						<option value={category}>{category}</option>
 					{/each}
@@ -57,10 +54,10 @@
 	</Content>
 	<Actions>
 		<Button on:click={closeDialog}>Close</Button>
-
 		<Button on:click={Generate}>Generate</Button>
 	</Actions>
 </Dialog>
+
 <button class="pass-new-quiz" on:click={() => (dialogOpen = true)}>Pass New Quiz</button>
 <button class="create-quiz-button" on:click={createNewQuiz}>Create Quiz</button>
 <button class="random-quiz" on:click={PassNewQuiz}>Random-quiz</button>
@@ -111,10 +108,6 @@
 		justify-content: flex-end;
 		padding: 1rem;
 	}
-
-	/* .input-field {
-		margin-bottom: 1rem;
-	} */
 
 	@media (max-width: 991px) {
 		.create-quiz-button {
