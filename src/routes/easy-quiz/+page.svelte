@@ -50,22 +50,64 @@
     </main>
     
     <style>
-        ul {
-            list-style-type: none;
-            padding: 0;
+        :root{
+            --main-height: auto;
         }
+    body {
+        background: radial-gradient(121.81% 143.28% at 26.61% 20.97%, #001c00 37.47%, rgba(83, 232, 36, 0.34) 100%);
+    }
     
-        li {
-            margin-bottom: 1em;
-        }
-    
-        h2 {
-            margin-bottom: 0.5em;
-        }
-    
-        h1 {
-            margin-bottom: 1em;
-        }
+    main {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #196f19;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: LightGreen;
+        font-size: 2em;
+        margin-bottom: 1em;
+        text-align: center;
+    }
+
+    h2 {
+        color: #000;
+        font-size: 1.5em;
+        margin-bottom: 0.5em;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 1em;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    li > ul {
+        margin-top: 0.5em;
+    }
+
+    li > ul > li {
+        background-color: #f1f1f1;
+        margin-bottom: 0.5em;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    li > ul > li:hover {
+        background-color: #cbcbcb;
+        cursor: pointer;
+    }
     </style>
 </CheckLogin>
 

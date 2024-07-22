@@ -1,12 +1,18 @@
 <script lang="ts">
-	export let name: string = 'Name';
+  import { getNickName } from '$lib/firebase/fitebase';
+	import { onMount } from 'svelte';
+	
+  onMount(async () => {
+	name = await getNickName(localStorage.getItem('log'));
+  })
+  	export let name: string | null = "Unknown";
 	export let description: string = 'Description';
 	export let imageUrl: string = './profile.svg';
 </script>
 
 <section class="user-info">
 	<img src={imageUrl} alt="User profile" class="user-avatar" />
-	<h2 class="user-name">{name}</h2>
+	<h2 class="user-name">{name != null ? name : "Unknown"}</h2>
 	<p class="user-description">{description}</p>
 </section>
 
