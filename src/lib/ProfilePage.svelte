@@ -4,17 +4,13 @@
 	import QuizList from './QuizList.svelte';
 	import CreateQuizButton from './CreateQuizButton.svelte';
 	export let data;
-	export let name = '';
-	if (data != undefined) {
-		name = data.quizzes[0].user_nickname;
-	}
 </script>
 
 <body style="margin: 0;">
 	<main class="profile-page">
 		<ProfileHeader />
 		<div class="profile-content">
-			<UserInfo {name} />
+			<UserInfo />
 			<div class="quiz-section">
 				<h2 class="quiz-section-title">Your quizzes</h2>
 				<QuizList {data} />
