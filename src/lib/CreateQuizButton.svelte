@@ -65,7 +65,7 @@
 <button class="create-quiz-button" on:click={createNewQuiz}>Create Quiz</button>
 <button class="random-quiz" on:click={PassNewQuiz}>Random-quiz</button>
 <button class="pass-linux" on:click={LinuxQuiz}>Linux-quiz</button>
-<button class="test-quiz" on:click={TestQuiz}>TestQuiz</button>
+<!-- <button class="test-quiz" on:click={TestQuiz}>TestQuiz</button> -->
 
 <style>
 	.create-quiz-button,
