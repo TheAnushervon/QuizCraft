@@ -19,66 +19,6 @@
 
 	export let data;
 
-	let quizName = '';
-	let temp_quizName = quizName;
-
-	async function deleteQuiz(quizName: string) {
-		console.log(quizName);
-		goto('/main');
-		const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
-		const querySnapshot = await getDocs(q);
-
-		if (!querySnapshot.empty) {
-			const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
-			try {
-				await deleteDoc(quizRef);
-				console.log('Quiz deleted successfully');
-			} catch (error) {
-				console.error('Error deleting quiz', error);
-			}
-		} else {
-			console.log('Quiz not found');
-		}
-	}
-
-	async function releaseQuiz() {
-		goto('/main');
-		let nickname = await getNickName(localStorage.getItem('log'));
-
-		const quizData = {
-			user_nickname: nickname,
-			name: quizName,
-			questions: questions.map((question) => ({
-				question: question.question,
-				variants: question.variants.map((variant) => ({
-					text: variant.text,
-					isCorrect: variant.isCorrect
-				}))
-			}))
-		};
-
-		const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
-		const querySnapshot = await getDocs(q);
-
-		if (querySnapshot.empty) {
-			try {
-				await addDoc(collection(db, 'quizzes'), quizData);
-				quizName = quizData.name;
-				console.log('Quiz released successfully');
-			} catch (error) {
-				console.error('Error releasing quiz', error);
-			}
-		} else {
-			const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
-			try {
-				await setDoc(quizRef, quizData, { merge: true });
-				console.log('Quiz updated successfully');
-			} catch (error) {
-				console.error('Error updating quiz', error);
-			}
-		}
-	}
-
 	interface Variant {
 		text: string;
 		isCorrect: boolean;
@@ -100,17 +40,142 @@
 			]
 		}
 	];
-	console.log(questions[0].question);
-	console.log(data);
+
+	let quizName = '';
+	let temp_quizName = quizName;
 	if (data != undefined) {
-		console.log(data);
 		quizName = data.quiz.name;
 		temp_quizName = data.quiz.name;
-		console.log(data.quiz.name);
 		questions = data.quiz.questions;
 	}
-	// console.log(data.questions);
-	// console.log(data[0].question);
+
+	let quizNameError = '';
+	let questionErrors: string[] = [];
+	let variantErrors: string[] = [];
+
+	function validateQuizName() {
+		quizNameError = quizName ? '' : 'Quiz name cannot be empty';
+		return !quizNameError;
+	}
+
+	function validateQuestion() {
+		// questionErrors[index] = questions[index].question ? '' : 'Question cannot be empty';
+		// return !questionErrors[index];
+		let isValid = true;
+		for (let i = 0; i < questions.length; i++) {
+			questionErrors[i] = questions[i].question ? '' : 'Question cannot be empty';
+			isValid = !questionErrors[i] && isValid;
+			return isValid;
+		}
+	}
+
+	function validateVariant() {
+		let isValid = true;
+		for (let i = 0; i < questions.length; i++) {
+			for (let j = 0; j < questions[i].variants.length; j++) {
+				isValid = !!questions[i].variants[j].text && isValid;
+				console.log(questions[i].variants[j]);
+			}
+		}
+		return isValid;
+	}
+
+	function validateVariantsAtLeastOnCorrect(questionIndex: number, variantIndex: number) {
+		const hasCorrectVariant = questions[questionIndex].variants.some(
+			(variant) => variant.isCorrect
+		);
+		variantErrors[questionIndex] = hasCorrectVariant ? '' : 'At least one variant must be correct';
+		return !variantErrors[questionIndex];
+	}
+
+	function validateVariants() {
+		let isValid = true;
+		for (let i = 0; i < questions.length; i++) {
+			for (let j = 0; j < questions[i].variants.length; j++) {
+				isValid = validateVariantsAtLeastOnCorrect(i, j) && isValid;
+			}
+		}
+		return isValid;
+	}
+
+	async function deleteQuiz(quizName: string) {
+		const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
+		const querySnapshot = await getDocs(q);
+
+		if (!querySnapshot.empty) {
+			const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+			try {
+				await deleteDoc(quizRef);
+				goto('/main');
+				console.log('Quiz deleted successfully');
+			} catch (error) {
+				console.error('Error deleting quiz', error);
+			}
+		} else {
+			console.log('Quiz not found');
+		}
+	}
+
+	async function releaseQuiz() {
+		if (!validateQuizName()) {
+			alert('Quiz name cannot be empty');
+		} else if (!validateQuestion()) {
+			alert('Question cannot be empty, recheck please and delete unnecessary ones');
+		} else if (!validateVariant()) {
+			alert('Variant cannot be empty, recheck please and remove unnecessary ones');
+		} else if (!validateVariants()) {
+			alert('At least one variant should be correct in each question');
+		} else {
+			let nickname = await getNickName(localStorage.getItem('log'));
+
+			const quizData = {
+				user_nickname: nickname,
+				name: quizName,
+				questions: questions.map((question) => ({
+					question: question.question,
+					variants: question.variants.map((variant) => ({
+						text: variant.text,
+						isCorrect: variant.isCorrect
+					}))
+				}))
+			};
+
+			const q = query(collection(db, 'quizzes'), where('name', '==', quizName));
+			const querySnapshot = await getDocs(q);
+
+			if (querySnapshot.empty) {
+				try {
+					await addDoc(collection(db, 'quizzes'), quizData);
+					quizName = quizData.name;
+					console.log('Quiz released successfully');
+				} catch (error) {
+					console.error('Error releasing quiz', error);
+				}
+			} else {
+				const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+				try {
+					await setDoc(quizRef, quizData, { merge: true });
+					console.log('Quiz updated successfully');
+				} catch (error) {
+					console.error('Error updating quiz', error);
+				}
+			}
+
+			if (quizName != temp_quizName) {
+				const q = query(collection(db, 'quizzes'), where('name', '==', temp_quizName));
+				const querySnapshot = await getDocs(q);
+				const quizRef = doc(db, 'quizzes', querySnapshot.docs[0].id);
+				try {
+					await deleteDoc(quizRef);
+					console.log('Quiz deleted successfully');
+				} catch (error) {
+					console.error('Error deleting quiz', error);
+				}
+			}
+
+			goto('/main');
+		}
+	}
 
 	function addVariant(questionIndex: number) {
 		questions[questionIndex].variants = [
@@ -174,33 +239,12 @@
 	console.log(questions);
 </script>
 
-<!-- <main class="quiz-creation">
-	<QuizHeader />
-	<QuestionSection
-		question={questions[currentQuestionIndex].question}
-		on:update={(event) => updateQuestion(event.detail)}
-	/>
-	{#each variants as variant, index (index)}
-		<VariantItem
-			{variant}
-			on:click={() => toggleCorrectness(index)}
-			on:update={(event) => updateVariant(index, event.detail)}
-		/>
-	{/each}
-	<button class="add-variant" on:click={addVariant}>+ variant...</button>
-	<div class="action-buttons">
-		<button class="delete-button" on:click={deleteQuestion}>Delete question</button>
-		<button class="add-button" on:click={addQuestion}>Add question</button>
-	</div>
-	<NavigationButtons on:previous={previousQuestion} on:next={nextQuestion} />
-	<ReleaseButton />
-</main> -->
-
 <main class="quiz-creation">
 	<QuizHeader />
 	<section class="name-section">
 		<div class="name-quiz">Quiz Name:</div>
 		<input type="text" class="name-text" placeholder="Enter quiz name" bind:value={quizName} />
+		<!-- <div class="error">{quizNameError}</div> -->
 	</section>
 	<QuestionSection
 		number={currentQuestionIndex + 1}

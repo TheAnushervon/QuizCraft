@@ -1,13 +1,17 @@
 <script lang="ts">
-	export let name: string = 'Name';
-	export let description: string = 'Description';
+	import { getNickName } from './firebase/fitebase';
+	// export let name: string = 'Name';
 	export let imageUrl: string = './profile.svg';
+	import { onMount } from 'svelte';
+	export let name: string | null = '';
+	onMount(async () => {
+		name = await getNickName(localStorage.getItem('log'));
+	});
 </script>
 
 <section class="user-info">
 	<img src={imageUrl} alt="User profile" class="user-avatar" />
 	<h2 class="user-name">{name}</h2>
-	<p class="user-description">{description}</p>
 </section>
 
 <style>
@@ -35,13 +39,6 @@
 		font-size: 32px;
 	}
 
-	.user-description {
-		color: #8921c2;
-		font-family: Kanit, sans-serif;
-		margin-top: 12px;
-		font-size: 24px;
-	}
-
 	@media (max-width: 991px) {
 		.user-info {
 			font-size: 20px;
@@ -50,10 +47,6 @@
 
 		.user-name {
 			font-size: 24px;
-		}
-
-		.user-description {
-			font-size: 18px;
 		}
 	}
 </style>
