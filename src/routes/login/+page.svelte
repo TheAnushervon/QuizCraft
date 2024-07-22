@@ -18,7 +18,7 @@
 		if (!result.passed) alert(result.msg);
 		else {
 			localStorage.setItem('log', result.msg);
-			navigate('/main');
+			navigate('/');
 			location.reload();
 		}
 	}
