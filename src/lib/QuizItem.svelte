@@ -1,13 +1,10 @@
 <script lang="ts">
 	export let title: string;
 	export let id: string;
-
-	function viewStatistics(): void {}
 </script>
 
 <a href={`/quizzes/${id}`} class="quiz-item">
 	<h3 class="quiz-title">{title}</h3>
-	<button class="statistics-button" on:click={viewStatistics}> Statistic </button>
 </a>
 
 <style>
@@ -29,17 +26,6 @@
 		text-underline-offset: 8px;
 	}
 
-	.statistics-button {
-		font-family: Kanit, sans-serif;
-		border-radius: 20px;
-		background-color: rgba(83, 232, 36, 0.53);
-		color: #fff;
-		padding: 8px 20px;
-		font-size: 24px;
-		border: none;
-		cursor: pointer;
-	}
-
 	@media (max-width: 991px) {
 		.quiz-item {
 			flex-wrap: wrap;
@@ -47,12 +33,6 @@
 
 		.quiz-title {
 			font-size: 20px;
-		}
-
-		.statistics-button {
-			font-size: 18px;
-			padding: 6px 12px;
-			margin-top: 6px;
 		}
 	}
 </style>
