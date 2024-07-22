@@ -66,9 +66,16 @@
 
 <body style="margin: 0;">
 	{#if showResults}
+	<div class="results-container">
 		<div class="results">
 			<p>You answered {correctAnswers} out of {questions.length} questions correctly.</p>
+			<div class="results-circles">
+				{#each questions as question, index}
+					<div class="result-circle {question.variants.some(variant => variant.isSelected && variant.isCorrect) ? 'correct' : 'incorrect'}"></div>
+				{/each}
+			</div>
 		</div>
+	</div>
 	{:else}
 		<main class="quiz-taking">
 			<QuizHeader />
@@ -108,6 +115,9 @@
 		font-family: 'Roboto', sans-serif;
 	}
 
+	.results {
+		background-color: #44cc2b;
+	}
 	main {
 		display: flex;
 		flex-direction: column;
@@ -125,7 +135,40 @@
 		padding: 0 20px;
 		box-sizing: border-box;
 	}
+	.results-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 100vh;
+		background: radial-gradient(
+			161.81% 143.28% at 26.61% 20.97%,
+			#242824 37.47%,
+			rgba(83, 232, 36, 0.34) 100%
+		);
+		color: white;
+		text-align: center;
+		border-radius: 10;
+	}
+	.results-circles {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}
 
+	.result-circle {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		margin: 0 5px;
+	}
+	.correct {
+		background-color: green;
+	}
+
+	.incorrect {
+		background-color: red;
+	}
 	.name-section {
 		display: flex;
 		align-items: center;
